@@ -1,0 +1,48 @@
+== V1. Physics unit tests (no material noise) ==
+ on-target -> result, just inside -> result, just outside -> broken: PASS
+ a state-1 strike on T2's target gives state 2 (only techniques from current state count): PASS
+ the same strike on a nodule (state 0) breaks it: PASS
+
+== V2. Success probability vs theory (strikes centred on target, motor noise W=1.5, sigma_mat=1) ==
+ easy tau=10: simulated 1.000  theory 1.000
+ medium tau=6: simulated 0.989  theory 0.989
+ hard tau=4: simulated 0.823  theory 0.822
+
+== V3. Learning update identical to F&S / Part D code ==
+ max difference over 1000 random cases: 1.42e-14 PASS
+
+== V4. Practice off => practice parameters have no effect (same seed) ==
+ identical output: PASS
+
+== V5. Determinism: same seed -> same run ==
+ identical: PASS
+
+== V6. No death, no learning (crit=0, practice off): seeded knowledge must stay at 1.0 ==
+ min survival over run: 1.0 PASS
+
+== V7. No death but learning on: loss only from copying drift ==
+ survival at end: [0.98 1.   0.74 1.   0.42 0.98 0.98]
+
+== V8. Extreme: all tolerances huge (tau=40) -> nothing should be lost ==
+ mean survival: [0.96 0.98 0.99 0.96 0.97 0.92 0.88]
+
+== V9. Extreme: no noise anywhere (W=0, sigma_obs=0, sigma_mat=0) ==
+ mean survival: [0.72 0.14 0.24 0.07 0.05 0.03 0.02]
+V10. Acquisition test: one naive learner sees ONLY strikes of one technique.
+     Observations needed until it holds that technique (median, % never within 3000):
+  tau=10 sigma_obs=0: median    358   never    0%
+  tau=10 sigma_obs=3: median    394   never    0%
+  tau= 6 sigma_obs=0: median    398   never    0%
+  tau= 6 sigma_obs=3: median    400   never    0%
+  tau= 4 sigma_obs=0: median    442   never    0%
+  tau= 4 sigma_obs=3: median    526   never    1%
+
+V11. Twin asymmetry: swap the targets of T0 and T1 (16 seeds, social only)
+  original: T0 0.30  T1 0.30
+  swapped : T0 0.30  T1 0.24
+V11 again (targets equidistant from centre), 24 seeds:
+  T0 0.28±0.04   T1 0.33±0.04
+  swapped: T0 0.28  T1 0.29
+V8 again, tau=40 everywhere: [0.96 0.98 0.99 0.96 0.97 0.92 0.88]
+V9 again, no noise:         [0.72 0.14 0.24 0.07 0.05 0.03 0.02]
+V12 naive start (nobody seeded), 8 seeds: [0.08 0.1  0.   0.02 0.   0.   0.  ]
