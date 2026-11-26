@@ -262,13 +262,13 @@ body.speaker #notes{display:flex}
 <div class="eb">Analysis · five experiments, 896 seeded runs</div>
 <h2>Each experiment asks one question of the result.</h2>
 <div class="exrows">
-<div class="card exr"><b class="ex">E1</b><div><h3>Main</h3>Does the hard step die, and does practice save it?</div><div class="mute">Tolerance τ ∈ {2…6} × practice off/on<br><b>10 settings × 20 runs</b></div><div>Survival mean ± 95% CI; <b>benefit = practice − copying</b></div><svg viewBox="0 0 120 60"><g fill="#8d7c69"><rect x="6" y="48" width="9" height="6"/><rect x="30" y="44" width="9" height="10"/><rect x="54" y="42" width="9" height="12"/><rect x="78" y="42" width="9" height="12"/><rect x="102" y="38" width="9" height="16"/></g><g fill="#2c5d8c"><rect x="16" y="46" width="9" height="8"/><rect x="40" y="30" width="9" height="24"/><rect x="64" y="18" width="9" height="36"/><rect x="88" y="10" width="9" height="44"/><rect x="112" y="8" width="7" height="46"/></g></svg></div>
-<div class="card exr"><b class="ex">E2</b><div><h3>Noise</h3>Does the answer depend on how noisy hands and eyes are?</div><div class="mute">Motor W × perception σ<sub>obs</sub>, 3 × 3, × practice<br><b>18 × 10 runs</b></div><div>Grid of survival; gain in every cell</div><svg viewBox="0 0 120 60"><rect x="30" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.45"/><rect x="50" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.6"/><rect x="70" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.8"/><rect x="30" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.5"/><rect x="50" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.65"/><rect x="70" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.75"/><rect x="30" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.3"/><rect x="50" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.32"/><rect x="70" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.3"/></svg></div>
-<div class="card exr"><b class="ex">E3</b><div><h3>Sensitivity</h3>Which assumption could flip it?</div><div class="mute">One factor at a time: halve, double or switch (21 settings)<br><b>42 × 8 runs</b></div><div>Change in survival and gain from the baseline</div><svg viewBox="0 0 120 60"><line x1="60" y1="2" x2="60" y2="58" stroke="#8d7c69" stroke-dasharray="3 3"/><g fill="#2c5d8c"><rect x="60" y="6" width="44" height="7"/><rect x="60" y="17" width="30" height="7"/><rect x="60" y="28" width="22" height="7"/><rect x="60" y="39" width="12" height="7"/><rect x="60" y="50" width="6" height="7"/></g></svg></div>
-<div class="card exr"><b class="ex">E4</b><div><h3>Robustness</h3>Is it an artefact of the threshold, or of stopping early?</div><div class="mute">Weight threshold 0.05 / 0.2; run length 80,000<br><b>6 × 10 runs</b></div><div>Same survival measure, compared with E1</div><svg viewBox="0 0 120 60"><path d="M4 10 C40 20 70 30 116 52" fill="none" stroke="#8d7c69" stroke-width="3"/><path d="M4 10 C30 30 60 26 116 24" fill="none" stroke="#2c5d8c" stroke-width="3"/></svg></div>
-<div class="card exr"><b class="ex">E5</b><div><h3>Uncertainty</h3>Varying everything at once: how big is the gain, and what drives it?</div><div class="mute">Latin hypercube: W, σ<sub>obs</sub>, σ<sub>mat</sub>, η<sub>P</sub>, β, τ<br><b>60 sets × 2 runs</b></div><div>Share of sets with a gain; <b>PRCC</b> ranks each input’s influence</div><svg viewBox="0 0 120 60"><circle cx="8" cy="50" r="3" fill="#2c5d8c"/><circle cx="18" cy="44" r="3" fill="#2c5d8c"/><circle cx="22" cy="52" r="3" fill="#2c5d8c"/><circle cx="34" cy="38" r="3" fill="#2c5d8c"/><circle cx="40" cy="42" r="3" fill="#2c5d8c"/><circle cx="48" cy="30" r="3" fill="#2c5d8c"/><circle cx="56" cy="36" r="3" fill="#2c5d8c"/><circle cx="62" cy="24" r="3" fill="#2c5d8c"/><circle cx="72" cy="28" r="3" fill="#2c5d8c"/><circle cx="80" cy="18" r="3" fill="#2c5d8c"/><circle cx="88" cy="22" r="3" fill="#2c5d8c"/><circle cx="98" cy="12" r="3" fill="#2c5d8c"/><circle cx="108" cy="10" r="3" fill="#2c5d8c"/><circle cx="112" cy="16" r="3" fill="#2c5d8c"/><line x1="4" y1="54" x2="116" y2="8" stroke="#b5481f" stroke-width="2"/></svg></div>
+<div class="card exr"><b class="ex">E1</b><div><h3>Main</h3>Does the hard step die, and does practice save it?</div><div class="mute">Tolerance τ ∈ {2…6} × practice off/on<br><b>10 settings × 20 runs = 200</b></div><div>Survival mean ± 95% CI; <b>benefit = practice − copying</b></div><svg viewBox="0 0 120 60"><g fill="#8d7c69"><rect x="6" y="48" width="9" height="6"/><rect x="30" y="44" width="9" height="10"/><rect x="54" y="42" width="9" height="12"/><rect x="78" y="42" width="9" height="12"/><rect x="102" y="38" width="9" height="16"/></g><g fill="#2c5d8c"><rect x="16" y="46" width="9" height="8"/><rect x="40" y="30" width="9" height="24"/><rect x="64" y="18" width="9" height="36"/><rect x="88" y="10" width="9" height="44"/><rect x="112" y="8" width="7" height="46"/></g></svg></div>
+<div class="card exr"><b class="ex">E2</b><div><h3>Noise</h3>Does the answer depend on how noisy hands and eyes are?</div><div class="mute">Motor W × perception σ<sub>obs</sub>, 3 × 3, × practice<br><b>18 × 10 = 180</b></div><div>Grid of survival; gain in every cell</div><svg viewBox="0 0 120 60"><rect x="30" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.45"/><rect x="50" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.6"/><rect x="70" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.8"/><rect x="30" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.5"/><rect x="50" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.65"/><rect x="70" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.75"/><rect x="30" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.3"/><rect x="50" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.32"/><rect x="70" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.3"/></svg></div>
+<div class="card exr"><b class="ex">E3</b><div><h3>Sensitivity</h3>Which assumption could flip it?</div><div class="mute">One factor at a time: halve, double or switch (21 settings)<br><b>42 × 8 = 336</b></div><div>Change in survival and gain from the baseline</div><svg viewBox="0 0 120 60"><line x1="60" y1="2" x2="60" y2="58" stroke="#8d7c69" stroke-dasharray="3 3"/><g fill="#2c5d8c"><rect x="60" y="6" width="44" height="7"/><rect x="60" y="17" width="30" height="7"/><rect x="60" y="28" width="22" height="7"/><rect x="60" y="39" width="12" height="7"/><rect x="60" y="50" width="6" height="7"/></g></svg></div>
+<div class="card exr"><b class="ex">E4</b><div><h3>Robustness</h3>Is it an artefact of the threshold, or of stopping early?</div><div class="mute">Weight threshold 0.05 / 0.2; run length 80,000<br><b>6 × 10 = 60</b></div><div>Same survival measure, compared with E1</div><svg viewBox="0 0 120 60"><path d="M4 10 C40 20 70 30 116 52" fill="none" stroke="#8d7c69" stroke-width="3"/><path d="M4 10 C30 30 60 26 116 24" fill="none" stroke="#2c5d8c" stroke-width="3"/></svg></div>
+<div class="card exr"><b class="ex">E5</b><div><h3>Uncertainty</h3>Varying everything at once: how big is the gain, and what drives it?</div><div class="mute">Latin hypercube: W, σ<sub>obs</sub>, σ<sub>mat</sub>, η<sub>P</sub>, β, τ<br><b>60 sets × 2 = 120</b></div><div>Share of sets with a gain; <b>PRCC</b> ranks each input’s influence</div><svg viewBox="0 0 120 60"><circle cx="8" cy="50" r="3" fill="#2c5d8c"/><circle cx="18" cy="44" r="3" fill="#2c5d8c"/><circle cx="22" cy="52" r="3" fill="#2c5d8c"/><circle cx="34" cy="38" r="3" fill="#2c5d8c"/><circle cx="40" cy="42" r="3" fill="#2c5d8c"/><circle cx="48" cy="30" r="3" fill="#2c5d8c"/><circle cx="56" cy="36" r="3" fill="#2c5d8c"/><circle cx="62" cy="24" r="3" fill="#2c5d8c"/><circle cx="72" cy="28" r="3" fill="#2c5d8c"/><circle cx="80" cy="18" r="3" fill="#2c5d8c"/><circle cx="88" cy="22" r="3" fill="#2c5d8c"/><circle cx="98" cy="12" r="3" fill="#2c5d8c"/><circle cx="108" cy="10" r="3" fill="#2c5d8c"/><circle cx="112" cy="16" r="3" fill="#2c5d8c"/><line x1="4" y1="54" x2="116" y2="8" stroke="#b5481f" stroke-width="2"/></svg></div>
 </div>
-<div class="mute" style="font-size:18px;margin-top:12px">Every run is seeded and exactly reproducible: about 1 s per run without practice, 6 s with it. All figures and tables are regenerated from the raw results by one script (analysis/make_figures.py).</div>
+<div class="mute" style="font-size:18px;margin-top:12px"><b style="color:var(--ink)">Total: 200 + 180 + 336 + 60 + 120 = 896 runs.</b> Every run is seeded and exactly reproducible: about 1 s per run without practice, 6 s with it. All figures and tables are regenerated from the raw results by one script (analysis/make_figures.py).</div>
 </section>
 
 <section class="sl" data-title="H1: copying loses hard steps" data-steps="2" id="h1">
@@ -537,10 +537,10 @@ function entrance(sl){
   if (hooksIn[sl.id]) hooksIn[sl.id]();
 }
 function transition(a, b, dir){
-  if (leaving && leaving !== b) { leaving.getAnimations().forEach(x => x.cancel()); leaving.classList.remove('leave'); }
+  if (leaving && leaving !== b) { leaving.getAnimations({ subtree: true }).forEach(x => x.cancel()); leaving.classList.remove('leave'); }
   b.getAnimations().forEach(x => x.cancel());
   a.classList.remove('cur'); a.classList.add('leave'); leaving = a;
-  const done = () => { a.classList.remove('leave'); a.getAnimations().forEach(x => x.cancel()); if (leaving === a) leaving = null; };
+  const done = () => { a.classList.remove('leave'); a.getAnimations({ subtree: true }).forEach(x => x.cancel()); if (leaving === a) leaving = null; };
   const la = A(a, [{ opacity: 1, transform: 'none', filter: 'blur(0px)' }, { opacity: 0, transform: `translateX(${-70 * dir}px) scale(.965)`, filter: 'blur(5px)' }], { duration: 650, easing: EASE.inout, fill: 'forwards' });
   if (la) la.onfinish = done; else done();
   A(b, [{ opacity: 0, transform: `translateX(${110 * dir}px) scale(1.01)` }, { opacity: 1, transform: 'none' }], { duration: 1100, delay: 150, easing: EASE.out });
@@ -549,19 +549,21 @@ function transition(a, b, dir){
 }
 const toneOf = s => s.classList.contains('cold') || s.classList.contains('cine') ? 'dark' : 'light';
 function toneShift(a, b, dir){
-  if (leaving && leaving !== b) { leaving.getAnimations().forEach(x => x.cancel()); leaving.classList.remove('leave'); }
-  b.getAnimations().forEach(x => x.cancel());
+  if (leaving && leaving !== b) { leaving.getAnimations({ subtree: true }).forEach(x => x.cancel()); leaving.classList.remove('leave'); }
+  b.getAnimations({ subtree: true }).forEach(x => x.cancel());
   a.classList.remove('cur'); a.classList.add('leave'); leaving = a;
-  const down = toneOf(b) === 'dark';
-  const done = () => { a.classList.remove('leave'); a.getAnimations().forEach(x => x.cancel()); if (leaving === a) leaving = null; };
-  /* lights down: the page dims as if we lean in; lights up: a lamp is lit */
-  const la = A(a, down ? [{ filter: 'brightness(1)', transform: 'none', opacity: 1 }, { filter: 'brightness(.05)', transform: 'scale(1.04)', opacity: 1, offset: .85 }, { filter: 'brightness(0)', transform: 'scale(1.05)', opacity: 0 }]
-                         : [{ filter: 'brightness(1)', opacity: 1 }, { filter: 'brightness(0)', opacity: 0 }], { duration: down ? 1000 : 650, easing: EASE.inout, fill: 'forwards' });
+  const down = toneOf(b) === 'dark', D = 1700;
+  const done = () => { a.classList.remove('leave'); a.getAnimations({ subtree: true }).forEach(x => x.cancel()); if (leaving === a) leaving = null; };
+  /* one continuous dissolve: the old page dims as the new one rises through it (no cut to black) */
+  const la = A(a, [{ filter: 'brightness(1)', transform: 'none', opacity: 1 }, { filter: down ? 'brightness(.45)' : 'brightness(1.25) sepia(.3)', transform: 'scale(1.015)', opacity: 1, offset: .6 }, { filter: down ? 'brightness(.3)' : 'brightness(1.35) sepia(.4)', transform: 'scale(1.02)', opacity: 0 }], { duration: D, easing: 'cubic-bezier(.45,0,.55,1)', fill: 'forwards' });
   if (la) la.onfinish = done; else done();
-  A(b, down ? [{ opacity: 0, filter: 'brightness(0)' }, { opacity: 1, filter: 'brightness(.4)', offset: .4 }, { opacity: 1, filter: 'brightness(1)' }]
-            : [{ opacity: 0, filter: 'brightness(.25) sepia(.6)' }, { opacity: 1, filter: 'brightness(.7) sepia(.4)', offset: .45 }, { opacity: 1, filter: 'brightness(1) sepia(0)' }], { duration: down ? 1400 : 1300, delay: down ? 750 : 450, easing: EASE.out });
-  const sh = $('sheen');
-  if (!down) A(sh, [{ transform: 'translateX(120%) skewX(-8deg) scaleX(3)', opacity: 0 }, { opacity: .8, offset: .5 }, { transform: 'translateX(140%) skewX(-8deg) scaleX(3)', opacity: 0 }], { duration: 1500, delay: 400, easing: EASE.out });
+  /* content leaves before the room changes, and arrives after: no double exposure of text */
+  [...a.children].forEach(c => A(c, [{ opacity: 1 }, { opacity: 0 }], { duration: D * .4, easing: EASE.inout, fill: 'forwards' }));
+  [...b.children].forEach(c => { if (!c.classList.contains('grain')) A(c, [{ opacity: 0 }, { opacity: 1 }], { duration: D * .45, delay: D * .5, easing: EASE.out, fill: 'backwards' }); });
+  A(b, down ? [{ opacity: 0, filter: 'brightness(.6)', transform: 'scale(.99)' }, { opacity: .7, filter: 'brightness(.85)', offset: .55 }, { opacity: 1, filter: 'brightness(1)', transform: 'none' }]
+            : [{ opacity: 0, filter: 'brightness(.75) sepia(.35)', transform: 'scale(.99)' }, { opacity: .7, filter: 'brightness(.92) sepia(.15)', offset: .55 }, { opacity: 1, filter: 'brightness(1) sepia(0)', transform: 'none' }],
+    { duration: D, delay: 120, easing: 'cubic-bezier(.45,0,.55,1)', fill: 'backwards' });
+  if (!down) A($('sheen'), [{ transform: 'translateX(120%) skewX(-8deg) scaleX(3)', opacity: 0 }, { opacity: .45, offset: .5 }, { transform: 'translateX(140%) skewX(-8deg) scaleX(3)', opacity: 0 }], { duration: 1800, delay: 300, easing: EASE.inout });
 }
 function show(i, s){
   i = Math.max(0, Math.min(slides.length - 1, i));
@@ -579,7 +581,7 @@ function show(i, s){
   });
   const id = slides[i].id;
   if (hooks[id]) hooks[id](s, changed, prevS);
-  if (changed) { const sl = slides[i], d = booted && slides[i].classList.contains('cine') ? 900 : 0; if (d && !RM) setTimeout(() => { if (slides[cur] === sl) entrance(sl); }, d); else entrance(sl); }
+  if (changed) { const sl = slides[i], d = booted && slides[i].classList.contains('cine') ? 850 : 0; if (d && !RM) setTimeout(() => { if (slides[cur] === sl) entrance(sl); }, d); else entrance(sl); }
   $('bar').style.width = Math.min(100, (i + 1) / main * 100) + '%';
   if (window.__flint) window.__flint(i);
   booted = true;
@@ -845,8 +847,8 @@ const HRVO = ['Inside the model: one tick, slowed right down.', 'First, the agen
 const LIMVO = ['Why can practice not save the hardest steps?', 'Practice only learns from a strike that works.', 'Narrow the window, and almost nothing works.', 'And practice cannot make anyone choose the hard way.'];
 $('g20').innerHTML = Array.from({ length: 20 }, () => '<i></i>').join('');
 $('g60').innerHTML = Array.from({ length: 60 }, (_, k) => `<i class="${k === 59 ? 'x' : ''}"></i>`).join('');
-setTimeout(() => { const _hr = hooks.hr; hooks.hr = (s, c, p) => { _hr(s, c, p); voSay('hrvo', HRVO[s] || '', c ? 900 : 0); }; }, 0);
-setTimeout(() => { const _lim = hooks.lim; hooks.lim = (s, c, p) => { _lim(s, c, p); voSay('limvo', LIMVO[s] || '', c ? 900 : 0); }; }, 0);
+setTimeout(() => { const _hr = hooks.hr; hooks.hr = (s, c, p) => { _hr(s, c, p); voSay('hrvo', HRVO[s] || '', c ? 950 : 0); }; }, 0);
+setTimeout(() => { const _lim = hooks.lim; hooks.lim = (s, c, p) => { _lim(s, c, p); voSay('limvo', LIMVO[s] || '', c ? 950 : 0); }; }, 0);
 
 /* ===== analysis: from a snapshot to a comparison ===== */
 const AN = {"0": {"end": [0.124, 0.064, 0.088, 0.04, 0.04, 0.12, 0.196, 0.144, 0.248, 0.16, 0.068, 0.044, 0.072, 0.176, 0.136, 0.108, 0.028, 0.192, 0.132, 0.184], "mu": 0.118, "ci": 0.027, "rep": 5, "ts": [1.0, 0.82, 0.7, 0.64, 0.64, 0.54, 0.56, 0.56, 0.6, 0.48, 0.42, 0.42, 0.42, 0.36, 0.34, 0.38, 0.38, 0.38, 0.36, 0.36, 0.32, 0.38, 0.38, 0.4, 0.38, 0.36, 0.32, 0.28, 0.24, 0.22, 0.22, 0.22, 0.2, 0.18, 0.18, 0.12, 0.14, 0.14, 0.12, 0.1, 0.1]}, "1": {"end": [0.396, 0.632, 0.632, 0.656, 0.564, 0.78, 0.652, 0.516, 0.592, 0.328, 0.324, 0.66, 0.472, 0.412, 0.208, 0.7, 0.696, 0.468, 0.548, 0.348], "mu": 0.529, "ci": 0.068, "rep": 7, "ts": [1.0, 0.9, 0.84, 0.72, 0.7, 0.68, 0.72, 0.7, 0.6, 0.56, 0.62, 0.66, 0.64, 0.68, 0.64, 0.6, 0.54, 0.52, 0.54, 0.54, 0.58, 0.66, 0.66, 0.6, 0.56, 0.46, 0.42, 0.42, 0.44, 0.48, 0.46, 0.48, 0.48, 0.54, 0.56, 0.56, 0.52, 0.52, 0.54, 0.54, 0.46]}};
@@ -873,7 +875,7 @@ const AN = {"0": {"end": [0.124, 0.064, 0.088, 0.04, 0.04, 0.12, 0.196, 0.144, 0
     <g id="an5">${last5.map((v, k) => `<circle cx="${xr(36 + k)}" cy="${yv(v)}" r="6" fill="${C.blue}" stroke="#fbf7ef" stroke-width="2"/>`).join('')}
       <path d="M${xr(36) - 6} 112 v-10 H${xr(40) + 6} v10" fill="none" stroke="${C.ink}" stroke-width="2"/>${T(xr(38), 90, 'mean of last 5', `text-anchor="middle" font-size="19"`)}
       <text x="${xr(38)}" y="146" text-anchor="middle" font-size="34" font-weight="600" fill="${C.blue}">${m5.toFixed(2)}</text></g></g>
-  <g id="anC">${T(950, 34, '③ Twenty runs per setting', `font-size="27" font-weight="600" fill="${C.ox}"`)}${T(950, 60, 'each dot is one run’s end survival of T2, τ = 4', `font-size="19" fill="#6d5a47"`)}
+  <g id="anC">${T(950, 34, '③ Twenty runs per setting', `font-size="27" font-weight="600" fill="${C.ox}"`)}${T(950, 60, 'τ = 4 only: 2 of E1’s 10 settings, 40 of 896 runs', `font-size="19" fill="#6d5a47"`)}
     ${axis(990, 1380)}${col(0, 1090)}${col(1, 1285)}${mean(0, 1090)}${mean(1, 1285)}
     <g id="anCl">${T(1090, 432, 'Copying only', `text-anchor="middle" font-size="20" fill="#6d5a47"`)}${T(1285, 432, '+ Practice', `text-anchor="middle" font-size="20" fill="${C.blue}"`)}
     ${T(1090, 466, AN[0].mu.toFixed(2) + ' ± ' + AN[0].ci.toFixed(2), `text-anchor="middle" font-size="26" font-weight="600"`)}${T(1285, 466, AN[1].mu.toFixed(2) + ' ± ' + AN[1].ci.toFixed(2), `text-anchor="middle" font-size="26" font-weight="600" fill="${C.blue}"`)}</g></g>
