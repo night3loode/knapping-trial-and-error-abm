@@ -225,17 +225,18 @@ body.speaker #notes{display:flex}
 </section>
 
 <!-- 6 LIMITS -->
-<section class="sl" data-title="Two limits" data-steps="2" id="lim">
+<section class="sl" data-title="Two limits" data-steps="3" id="lim">
 <div class="eb">Result 3 · Two limits on trial and error</div>
 <h2>Practice fails where success is rare, and where nobody chooses the skill.</h2>
 <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px;flex:1">
 <div class="card" data-f="1" style="display:flex;flex-direction:column">
 <h3 class="o">1 · It needs something to learn from</h3>
-<p style="font-size:21px">Practice only moves towards attempts that work. Five tries per tick, from a perfectly placed belief:</p>
-<svg id="darts" viewBox="0 0 680 330" style="width:100%;height:330px"></svg>
-<p style="font-size:21px">At τ = 2, <b class="no">3.5%</b> of attempts succeed. T2 survival: 0.02 → only 0.06. A sparse-reward problem.</p>
+<p style="font-size:21px">Practice only learns from a strike that lands inside the window (blue). Anything else breaks the stone.</p>
+<svg id="darts" viewBox="0 0 680 340" style="width:100%;height:340px"></svg>
+<p style="font-size:20px">At τ = 2, <b class="no">3.5%</b> of attempts succeed: T2 survival 0.02 → only 0.06. A sparse-reward problem.</p>
+<p class="cite">Illustrative strike sequence; the model’s rates from a perfect belief are 22% (τ 4) and 3.5% (τ 2).</p>
 </div>
-<div class="card" data-f="2" style="display:flex;flex-direction:column">
+<div class="card" data-f="3" style="display:flex;flex-direction:column">
 <h3 class="o">2 · It can’t save a skill nobody picks</h3>
 <p style="font-size:21px">T3 (easy) and T4 (hard) both finish the tool.</p>
 <svg id="mw" viewBox="0 0 680 330" style="width:100%;height:330px"></svg>
@@ -383,9 +384,10 @@ const N = [
  ['0:50', ['"Now add practice."',
    '[→ play] "The decline stops. T2 settles around 0.53 instead of 0.12, and finished tools go from half a percent to eight percent. In runs twice as long it holds at 0.73, while copying alone falls to 0.01. H2 holds."',
    '[→ sweep] "But look at the top row: at the narrowest window, 0.02 to 0.06. Almost nothing."'], []],
- ['1:10', ['"Two limits."',
-   '[→ left] "First: trial and error only learns from successes. Watch the attempts. At τ four, about one in five works. At τ two, 3.5 percent. There’s nothing to learn from. In learning terms, a sparse-reward problem."',
-   '[→ right] "Second: the hard technique T4 competes with an easy one that does the same job. Practice improves the mean: how well you do a technique. But which technique you pick depends on its weight, and weights grow only by watching successes, which the easy one produces more often. So the hard one is rarely chosen, rarely practised, and it fades."'], ['If asked “isn’t that a design choice?”: yes, practice doesn’t touch weights. Stated limitation; the next extension.']],
+ ['1:15', ['"Two limits."',
+   '[→ τ 4] "First: trial and error only learns from a strike that works. Watch the stone. Most practice strikes shatter it, and a broken stone teaches nothing. But this one holds, and a clean flake comes off. About one in five, at this difficulty. That flake is what the learner learns from."',
+   '[→ τ 2] "Now narrow the window. Strike, shatter. Strike, shatter. The waste piles up. 3.5 percent. There is nothing to learn from. In learning terms, a sparse-reward problem."',
+   '[→ right] "Second: the hard technique T4 competes with an easy one that does the same job. Practice improves the mean: how well you do a technique. But which technique you pick depends on its weight, and weights grow only by watching successes, which the easy one produces more often. So the hard one is rarely chosen, rarely practised, and it fades."'], ['If asked: the strike sequence is illustrative; the rates are the model’s (χ² from W, σ_mat, δ). If asked “isn’t limit 2 a design choice?”: yes, practice doesn’t touch weights; it is the next extension.']],
  ['0:50', ['"How sure am I? Practice helped in all twenty one-factor variations and in 98% of sixty random parameter sets. The strongest driver of how much it helps is the step’s tolerance: the same threshold."',
    '[→ contribution] "So: practice protects hard skills, but not the hardest, and not those with an easy substitute. That adds a boundary condition to Truskanov and Prat, and it makes a testable prediction."',
    '[→ next] "Next: teaching, practice that can change choice, and calibration against knapping data."'], []],
@@ -761,39 +763,127 @@ hooks.h2 = (s, changed, prevS) => {
   });
 };
 
-/* ---------- slide 7: limits ---------- */
+/* ---------- slide 7: limits — narrative knapping ---------- */
 (() => {
-  const S = $('darts'); let timer = null;
-  const panels = [[4, 170], [2, 510]], sc = 9.5, cy = 160;
-  const cnt = [{ h: 0, n: 0 }, { h: 0, n: 0 }];
-  const frame = () => {
-    S.innerHTML = panels.map(([tau, cx], pi) => `<circle cx="${cx}" cy="${cy}" r="118" fill="none" stroke="#e5d7bd"/><circle cx="${cx}" cy="${cy}" r="${tau*sc}" fill="rgba(44,93,140,.12)" stroke="${C.blue}" stroke-width="2"/>
-      <ellipse cx="${cx}" cy="22" rx="17" ry="12" fill="#8b8f96" stroke="#3a2a1f" stroke-width="1.5"/><text x="${cx + 26}" y="27" font-size="16" fill="#6d5a47">hammerstone</text>
-      <g id="dg${pi}"></g><text id="dc${pi}" x="${cx}" y="306" text-anchor="middle" font-size="24" font-weight="600" fill="${C.ink}">τ = ${tau}: –</text><text x="${cx}" y="328" text-anchor="middle" font-size="19" fill="#6d5a47">theory ${(100*pSucc(tau, true)).toFixed(tau === 2 ? 1 : 0)}%</text>`).join('');
-    cnt.forEach(c => { c.h = 0; c.n = 0; });
-  };
-  const launch = pi => {
-    const [tau, cx] = panels[pi], sd = Math.sqrt(W*W + DELTA*DELTA), off = [0,1,2].map(() => sd*gauss() - SM*gauss());
-    const ok = Math.hypot(...off) / tau <= 1, X = cx + Math.max(-115, Math.min(115, off[0]*sc)), Y = cy - Math.max(-115, Math.min(115, off[1]*sc));
-    const g = $('dg' + pi), c = mk('circle', { cx: X, cy: Y, r: 5, fill: C.umber });
-    g.appendChild(c); c.style.transformBox = 'fill-box'; c.style.transformOrigin = 'center';
-    const dx = cx - X, dy = 22 - Y;
-    const land = () => {
-      c.setAttribute('fill', ok ? C.blue : C.ochre); c.setAttribute('opacity', '.9');
-      const r = mk('circle', { cx: X, cy: Y, r: 7, fill: 'none', stroke: ok ? C.blue : C.ochre, 'stroke-width': 2 }); g.appendChild(r);
-      r.style.transformBox = 'fill-box'; r.style.transformOrigin = 'center';
-      const ra = A(r, [{ transform: 'scale(.4)', opacity: 1 }, { transform: 'scale(3)', opacity: 0 }], { duration: 800, easing: 'cubic-bezier(.2,.6,.3,1)', fill: 'forwards' });
-      if (ra) ra.onfinish = () => r.remove(); else r.remove();
-      if (!ok) for (let q = 0; q < 3; q++) { const a = Math.random() * 6.28, sh = mk('line', { x1: X, y1: Y, x2: X + Math.cos(a) * 9, y2: Y + Math.sin(a) * 9, stroke: C.ochre, 'stroke-width': 2 }); g.appendChild(sh);
-        sh.style.transformBox = 'view-box'; sh.style.transformOrigin = `${X}px ${Y}px`;
-        const sa = A(sh, [{ transform: 'translate(0,0)', opacity: 1 }, { transform: `translate(${Math.cos(a) * 16}px,${Math.sin(a) * 16}px)`, opacity: 0 }], { duration: 600, easing: 'ease-out', fill: 'forwards' }); if (sa) sa.onfinish = () => sh.remove(); else sh.remove(); }
-      cnt[pi].n++; if (ok) cnt[pi].h++;
-      $('dc' + pi).textContent = `τ = ${tau}: ${cnt[pi].h} of ${cnt[pi].n}`;
-    };
-    const fa = A(c, [{ transform: `translate(${dx}px,${dy}px) scale(.5)`, opacity: 0 }, { opacity: 1, offset: .15 }, { transform: `translate(${dx * .5}px,${dy * .5 - 70}px) scale(1.25)`, offset: .5 }, { transform: 'none', opacity: 1 }], { duration: 620, easing: 'cubic-bezier(.3,.2,.4,1)' });
-    if (fa) fa.onfinish = land; else land();
-  };
-  const run = () => { clearInterval(timer); frame(); let n = 0; timer = setInterval(() => { launch(0); launch(1); if (++n >= 30) clearInterval(timer); }, RM ? 0 : 150); };
+  const S = $('darts'), PAN = [{ tau: 4, cx: 170, seq: [0, 0, 1, 0, 0], sv: [.14, .86, .5, .1, .9] }, { tau: 2, cx: 510, seq: [0, 0, 0, 0, 0, 0, 0, 0], sv: [.12, .86, .22, .92, .08, .78, .3, .7] }];
+  const CY = 150, R = 95; let timers = [];
+  const geo = p => { const cx = p.cx, E0 = [cx + 2, CY - 86], E1 = [cx + 66, CY - 44];
+    const ex = E1[0] - E0[0], ey = E1[1] - E0[1], L = Math.hypot(ex, ey), ux = ex / L, uy = ey / L, nx = uy, ny = -ux;
+    return { cx, E0, E1, L, ux, uy, nx, ny, at: s => [E0[0] + ex * s, E0[1] + ey * s] }; };
+  const pts = a => a.map(q => q.map(v => v.toFixed(1)).join(',')).join(' ');
+  function frame(){
+    timers.forEach(clearTimeout); timers = [];
+    let o = '<defs>';
+    PAN.forEach((p, k) => { const i = 1; o += `<mask id="sm${k}" mask-type="alpha"><image href="${STONE[i]}" x="${p.cx - R}" y="${CY - R}" width="${2 * R}" height="${2 * R}"/></mask>`; });
+    o += '</defs>';
+    PAN.forEach((p, k) => { const g = geo(p), h = p.tau * 5, z0 = g.at(.5 - h / g.L), z1 = g.at(.5 + h / g.L);
+      o += `<g id="pan${k}" style="transition:opacity .8s">
+        <text x="${p.cx}" y="18" text-anchor="middle" font-size="20" font-weight="600" fill="${C.ink}">τ = ${p.tau}${p.tau === 2 ? ': a narrower window' : ''}</text>
+        <g id="debris${k}"></g>
+        <g id="stone${k}"></g>
+        <line x1="${(z0[0] + g.nx * 9).toFixed(1)}" y1="${(z0[1] + g.ny * 9).toFixed(1)}" x2="${(z1[0] + g.nx * 9).toFixed(1)}" y2="${(z1[1] + g.ny * 9).toFixed(1)}" stroke="${C.blue}" stroke-width="6" stroke-linecap="round"/>
+        <g id="fx${k}"></g>
+        <g id="tally${k}" transform="translate(${p.cx - 80},284)"></g>
+        <text id="cnt${k}" x="${p.cx}" y="318" text-anchor="middle" font-size="20" font-weight="600" fill="${C.ink}">clean flakes: 0 of 0</text>
+        <text x="${p.cx}" y="338" text-anchor="middle" font-size="17" fill="#6d5a47">model: ${(100 * pSucc(p.tau, true)).toFixed(p.tau === 2 ? 1 : 0)}% of practice strikes</text></g>`; });
+    S.innerHTML = o;
+    PAN.forEach((p, k) => { p.n = 0; p.h = 0; freshStone(k, false); });
+  }
+  const stoneImg = (p, extra = '') => { const i = 1; return `<image href="${STONE[i]}" x="${p.cx - R}" y="${CY - R}" width="${2 * R}" height="${2 * R}" ${extra}/>`; };
+  function freshStone(k, anim){
+    const p = PAN[k], g = $('stone' + k); g.innerHTML = `<g class="whole">${stoneImg(p)}</g>`;
+    if (anim) A(g.firstChild, [{ opacity: 0, transform: 'translateY(-14px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 450, easing: EASE.out });
+  }
+  const at = (ms, f) => timers.push(setTimeout(f, RM ? 0 : ms));
+  function hammer(k, I, dur){
+    const fx = $('fx' + k), hm = mk('ellipse', { cx: I[0], cy: I[1], rx: 15, ry: 11, fill: '#8b8f96', stroke: '#3a2a1f', 'stroke-width': 1.5 });
+    fx.appendChild(hm); hm.style.transformBox = 'fill-box'; hm.style.transformOrigin = 'center';
+    const a = A(hm, [{ transform: 'translate(-150px,-70px) rotate(-40deg)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translate(-60px,-80px) rotate(-15deg)', offset: .55 }, { transform: 'none' }, { transform: 'translate(-50px,-60px) rotate(-25deg)', opacity: 0 }],
+      { duration: dur, easing: 'cubic-bezier(.55,0,.85,.35)', fill: 'forwards' });
+    if (a) a.onfinish = () => hm.remove(); else hm.remove();
+  }
+  function shake(el, amp, dur){ A(el, [0, 1, 2, 3, 4, 5, 6, 7].map(q => ({ transform: q === 7 ? 'none' : `translate(${(q % 2 ? 1 : -1) * amp * (1 - q / 8)}px,${(q % 3 - 1) * amp * .5 * (1 - q / 8)}px)` })), { duration: dur, easing: 'linear' }); }
+  function dust(k, I, col, n){ const fx = $('fx' + k);
+    for (let q = 0; q < n; q++) { const a = -Math.PI * (.1 + Math.random() * .9), d = 18 + Math.random() * 30, c = mk('circle', { cx: I[0], cy: I[1], r: 1.6 + Math.random() * 2, fill: col });
+      fx.appendChild(c); const an = A(c, [{ transform: 'none', opacity: .9 }, { transform: `translate(${Math.cos(a) * d}px,${Math.sin(a) * d + 14}px)`, opacity: 0 }], { duration: 550 + Math.random() * 250, easing: 'cubic-bezier(.2,.6,.4,1)', fill: 'forwards' });
+      if (an) an.onfinish = () => c.remove(); else c.remove(); } }
+  function crackPath(p, I){ const J = [p.cx - 4, CY + 6], B = [p.cx - 14, CY + R + 10], Lp = [p.cx - R - 10, CY - 2]; return { J, B, Lp, d: `M${I[0]},${I[1]} L${(I[0] * .6 + J[0] * .4 + 4).toFixed(1)},${(I[1] * .6 + J[1] * .4 - 3).toFixed(1)} L${J[0]},${J[1]} L${J[0] - 3},${(J[1] + B[1]) / 2} L${B[0]},${B[1]} M${J[0]},${J[1]} L${(J[0] + Lp[0]) / 2},${J[1] - 9} L${Lp[0]},${Lp[1]}` }; }
+  function fail(k, s){
+    const p = PAN[k], g = geo(p), I = g.at(s), st = $('stone' + k), fx = $('fx' + k);
+    hammer(k, I, 620);
+    at(360, () => {
+      shake(st, 5, 240); dust(k, I, '#cdb894', 9);
+      const cp = crackPath(p, I), cr = mk('path', { d: cp.d, fill: 'none', stroke: '#2a1d14', 'stroke-width': 2.6, 'stroke-linejoin': 'round', mask: `url(#sm${k})` });
+      st.appendChild(cr); const len = 420; cr.style.strokeDasharray = len; A(cr, [{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: 170, easing: 'ease-in', fill: 'both' });
+      at(230, () => {
+        const top = CY - R - 20, bot = CY + R + 20, l = p.cx - R - 20, r = p.cx + R + 20, Ix = I[0];
+        const polys = [[[Ix, top], [r, top], [r, bot], cp.B, cp.J, I], [cp.J, cp.B, [l, bot], cp.Lp], [cp.Lp, [l, top], [Ix, top], I, cp.J]];
+        const moves = [[46, 26, 16], [-18, 46, -12], [-44, -14, -20]];
+        st.innerHTML = '';
+        polys.forEach((poly, q) => {
+          const id = `cl${k}_${q}_${Date.now() % 100000}`;
+          const sh = mk('g', {}); sh.innerHTML = `<clipPath id="${id}"><polygon points="${pts(poly)}"/></clipPath><g clip-path="url(#${id})">${stoneImg(p)}</g>`;
+          st.appendChild(sh); sh.style.transformBox = 'fill-box'; sh.style.transformOrigin = 'center';
+          const [mx, my, rot] = moves[q];
+          const an = A(sh, [{ transform: 'none', filter: 'none', opacity: 1 }, { transform: `translate(${mx}px,${my}px) rotate(${rot}deg)`, filter: 'grayscale(.2)', opacity: 1, offset: .45 }, { transform: `translate(${mx * 1.15}px,${my + 60}px) rotate(${rot * 1.4}deg) scale(.9)`, filter: 'grayscale(1) brightness(1.15)', opacity: 0 }],
+            { duration: 1150, easing: 'cubic-bezier(.2,.7,.4,1)', fill: 'forwards' });
+          if (an) an.onfinish = () => sh.remove(); else sh.remove();
+        });
+        dust(k, cp.J, '#9a8b78', 7);
+        const db = $('debris' + k), n = db.childElementCount;
+        for (let q = 0; q < 4; q++) { const x = p.cx - 80 + ((n * 29 + q * 43) % 160), y = CY + R - 2 - Math.min(14, Math.floor(n / 6) * 4) + ((n + q) % 3) * 4, w = 10 + ((n * 7 + q * 5) % 10);
+          const chip = mk('polygon', { points: pts([[x, y], [x + w, y - 3], [x + w * .7, y + 4]]), fill: '#a9a397', stroke: '#7d7466', 'stroke-width': .8, opacity: .85 }); db.appendChild(chip);
+          A(chip, [{ opacity: 0, transform: 'translateY(-30px)' }, { opacity: .85, transform: 'none' }], { duration: 600, delay: 500 + q * 80, easing: EASE.soft }); }
+        p.n++; tallyMark(k, false);
+        at(950, () => freshStone(k, true));
+      });
+    });
+  }
+  function success(k, s){
+    const p = PAN[k], g = geo(p), I = g.at(s), st = $('stone' + k);
+    hammer(k, I, 620);
+    at(360, () => {
+      shake(st, 7, 620); dust(k, I, '#cdb894', 5);
+      const cp = crackPath(p, I), cr = mk('path', { d: cp.d, fill: 'none', stroke: '#2a1d14', 'stroke-width': 2.4, mask: `url(#sm${k})` });
+      st.appendChild(cr); const len = 420; cr.style.strokeDasharray = len;
+      A(cr, [{ strokeDashoffset: len, opacity: 1 }, { strokeDashoffset: len * .72, opacity: 1, offset: .35 }, { strokeDashoffset: len * .72, opacity: .9, offset: .55 }, { strokeDashoffset: len, opacity: 0 }], { duration: 900, easing: 'ease-in-out', fill: 'forwards' });
+      at(950, () => {
+        cr.remove();
+        const whole = st.querySelector('.whole');
+        A(whole, [{ filter: 'brightness(1) contrast(1)' }, { filter: 'brightness(1.35) contrast(1.25)', offset: .3 }, { filter: 'brightness(1) contrast(1.08)' }], { duration: 700, easing: 'ease-out', fill: 'forwards' });
+        const sheen = mk('rect', { x: p.cx - R, y: CY - R, width: 40, height: 2 * R, fill: 'rgba(255,250,235,.75)', mask: `url(#sm${k})`, transform: `skewX(-20)` });
+        st.appendChild(sheen); const sa = A(sheen, [{ transform: 'skewX(-20deg) translateX(-60px)', opacity: 0 }, { opacity: 1, offset: .4 }, { transform: `skewX(-20deg) translateX(${2 * R + 40}px)`, opacity: 0 }], { duration: 700, easing: EASE.inout, fill: 'forwards' });
+        if (sa) sa.onfinish = () => sheen.remove();
+        at(520, () => {
+          const fl = [[I[0] - g.ux * 24, I[1] - g.uy * 24], [I[0] + g.ux * 24, I[1] + g.uy * 24], [I[0] - g.nx * 15 + g.ux * 4, I[1] - g.ny * 15 + g.uy * 4]];
+          const scar = mk('polygon', { points: pts(fl), fill: 'rgba(214,220,228,.92)', stroke: '#2a1d14', 'stroke-width': 1.2 }); st.appendChild(scar);
+          A(scar, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+          const id = `fl${k}_${Date.now() % 100000}`, fg = mk('g', {});
+          fg.innerHTML = `<clipPath id="${id}"><polygon points="${pts(fl)}"/></clipPath><g clip-path="url(#${id})">${stoneImg(p)}</g><polyline points="${pts([fl[0], fl[1]])}" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>`;
+          $('fx' + k).appendChild(fg); fg.style.transformBox = 'fill-box'; fg.style.transformOrigin = 'center';
+          A(fg, [{ transform: 'none' }, { transform: `translate(${g.nx * 62}px,${g.ny * 62 + 8}px) rotate(32deg) scale(1.15)` }], { duration: 1000, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' });
+          A(fg.lastChild, [{ opacity: 1 }, { opacity: 0 }], { duration: 900, delay: 400, fill: 'forwards' });
+          const ring = mk('circle', { cx: I[0], cy: I[1], r: 10, fill: 'none', stroke: C.blue, 'stroke-width': 3 }); $('fx' + k).appendChild(ring); ring.style.transformBox = 'fill-box'; ring.style.transformOrigin = 'center';
+          A(ring, [{ transform: 'scale(.4)', opacity: 1 }, { transform: 'scale(3.2)', opacity: 0 }], { duration: 1000, easing: 'cubic-bezier(.2,.6,.3,1)', fill: 'forwards' });
+          p.n++; p.h++; tallyMark(k, true);
+          at(1500, () => { fg.remove(); ring.remove(); freshStone(k, true); });
+        });
+      });
+    });
+  }
+  function tallyMark(k, ok){
+    const p = PAN[k], tg = $('tally' + k), x = (p.n - 1) * 20;
+    const m = ok ? mk('path', { d: `M${x},12 L${x + 12},0 L${x + 15},4 L${x + 3},16Z`, fill: C.blue }) : mk('path', { d: `M${x + 1},2 L${x + 13},14 M${x + 13},2 L${x + 1},14`, stroke: C.ochre, 'stroke-width': 2.6, 'stroke-linecap': 'round' });
+    tg.appendChild(m); m.style.transformBox = 'fill-box'; m.style.transformOrigin = 'center';
+    A(m, [{ transform: 'scale(0)' }, { transform: 'scale(1.4)', offset: .6 }, { transform: 'none' }], { duration: 450, easing: EASE.soft });
+    $('cnt' + k).textContent = `clean flakes: ${p.h} of ${p.n}`;
+  }
+  function run(k){
+    const p = PAN[k]; let tt = 300;
+    p.seq.forEach((ok, q) => { const s = p.sv[q]; at(tt, () => ok ? success(k, s) : fail(k, s)); tt += ok ? 3300 : (k === 1 ? 1350 : 1550); });
+  }
+  function finalState(k){ const p = PAN[k]; p.seq.forEach(ok => { p.n++; if (ok) p.h++; tallyMark(k, !!ok); }); if (k === 1) for (let q = 0; q < 8; q++) { p.n; } }
+  const dim = (k, on) => { const g = $('pan' + k); if (g) g.style.opacity = on ? 1 : .28; };
   const mw = (animate) => {
     const a = end('4_1', 3), b = end('4_1', 4), an = (t, d, x = '') => animate ? `data-a="${t}" data-d="${d}" ${x}` : '';
     $('mw').innerHTML = `<defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${C.umber}"/></marker></defs>
@@ -806,7 +896,13 @@ hooks.h2 = (s, changed, prevS) => {
     <text x="40" y="318" font-size="17" fill="#6d5a47" font-style="italic" ${an('fade', 2900)}>Survival with practice, τ = 4 (20 runs)</text>`;
     if (animate) svgAnim($('mw'));
   };
-  hooks.lim = (s, changed, prevS) => { if (s === 0) { clearInterval(timer); frame(); } if (s === 1 && prevS === 0) run(); else if (s >= 1 && changed) { frame(); run(); } if (s >= 2) mw(prevS === 1); };
+  hooks.lim = (s, changed, prevS) => {
+    if (changed || s === 0 || s < prevS) { frame(); dim(0, true); dim(1, true); }
+    if (s === 1 && prevS === 0) { dim(1, false); run(0); }
+    else if (s === 2 && prevS === 1) { dim(0, false); dim(1, true); run(1); }
+    else if (s >= 1 && (changed || s < prevS)) { finalState(0); if (s >= 2) finalState(1); dim(0, s === 1); dim(1, s >= 2 || s === 1 ? s >= 2 : true); }
+    if (s >= 3) { dim(0, true); dim(1, true); mw(prevS === 2); }
+  };
   frame(); mw(false);
 })();
 
