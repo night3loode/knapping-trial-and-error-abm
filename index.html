@@ -122,6 +122,12 @@ svg text{font-family:"EB Garamond",Georgia,serif}
 .cine #hrplot,.cine #darts{filter:drop-shadow(0 0 1px rgba(0,0,0,.2))}
 .cine #hrplot [stroke="#8fb4ff"],.cine #hrplot circle[stroke="#2c5d8c"]{filter:drop-shadow(0 0 6px rgba(143,180,255,.55))}
 .cine #mw rect[fill="#fbf7ef"]{fill:rgba(40,28,18,.9)}
+/* analysis */
+.exrows{display:flex;flex-direction:column;gap:10px}
+.exr{display:grid;grid-template-columns:62px 1.25fr 1.25fr 1.15fr 120px;gap:22px;align-items:center;padding:10px 20px;font-size:19px;line-height:1.3}
+.exr h3{margin:0 0 2px;font-size:22px}
+.exr .ex{font-size:38px;color:var(--ox);font-weight:600}
+.exr svg{width:120px;height:60px}
 /* hand run */
 .eqbox{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px 24px;min-height:260px;font-size:23px;line-height:1.45}
 .eqbox .f{font-style:italic;font-size:25px;color:var(--umber);margin:6px 0 10px;padding:8px 12px;background:#f3eadb;border-left:4px solid var(--ox);border-radius:3px}
@@ -244,6 +250,27 @@ body.speaker #notes{display:flex}
 </section>
 
 <!-- 4 H1 -->
+<!-- ANALYSIS 1 -->
+<section class="sl" data-title="Analysis: from runs to numbers" data-steps="3" id="an">
+<div class="eb">Analysis · what we recorded, and how</div>
+<h2>One snapshot, one run, twenty runs: one comparison.</h2>
+<div class="card" style="flex:1;padding:10px 16px"><svg id="ansvg" viewBox="0 0 1400 560" style="width:100%;height:100%"></svg></div>
+</section>
+
+<!-- ANALYSIS 2 -->
+<section class="sl" data-title="Analysis: five experiments" data-steps="0" id="ex" data-stagger="260" data-start="450">
+<div class="eb">Analysis · five experiments, 896 seeded runs</div>
+<h2>Each experiment asks one question of the result.</h2>
+<div class="exrows">
+<div class="card exr"><b class="ex">E1</b><div><h3>Main</h3>Does the hard step die, and does practice save it?</div><div class="mute">Tolerance τ ∈ {2…6} × practice off/on<br><b>10 settings × 20 runs</b></div><div>Survival mean ± 95% CI; <b>benefit = practice − copying</b></div><svg viewBox="0 0 120 60"><g fill="#8d7c69"><rect x="6" y="48" width="9" height="6"/><rect x="30" y="44" width="9" height="10"/><rect x="54" y="42" width="9" height="12"/><rect x="78" y="42" width="9" height="12"/><rect x="102" y="38" width="9" height="16"/></g><g fill="#2c5d8c"><rect x="16" y="46" width="9" height="8"/><rect x="40" y="30" width="9" height="24"/><rect x="64" y="18" width="9" height="36"/><rect x="88" y="10" width="9" height="44"/><rect x="112" y="8" width="7" height="46"/></g></svg></div>
+<div class="card exr"><b class="ex">E2</b><div><h3>Noise</h3>Does the answer depend on how noisy hands and eyes are?</div><div class="mute">Motor W × perception σ<sub>obs</sub>, 3 × 3, × practice<br><b>18 × 10 runs</b></div><div>Grid of survival; gain in every cell</div><svg viewBox="0 0 120 60"><rect x="30" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.45"/><rect x="50" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.6"/><rect x="70" y="2" width="18" height="17" fill="#2c5d8c" opacity="0.8"/><rect x="30" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.5"/><rect x="50" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.65"/><rect x="70" y="21" width="18" height="17" fill="#2c5d8c" opacity="0.75"/><rect x="30" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.3"/><rect x="50" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.32"/><rect x="70" y="40" width="18" height="17" fill="#2c5d8c" opacity="0.3"/></svg></div>
+<div class="card exr"><b class="ex">E3</b><div><h3>Sensitivity</h3>Which assumption could flip it?</div><div class="mute">One factor at a time: halve, double or switch (21 settings)<br><b>42 × 8 runs</b></div><div>Change in survival and gain from the baseline</div><svg viewBox="0 0 120 60"><line x1="60" y1="2" x2="60" y2="58" stroke="#8d7c69" stroke-dasharray="3 3"/><g fill="#2c5d8c"><rect x="60" y="6" width="44" height="7"/><rect x="60" y="17" width="30" height="7"/><rect x="60" y="28" width="22" height="7"/><rect x="60" y="39" width="12" height="7"/><rect x="60" y="50" width="6" height="7"/></g></svg></div>
+<div class="card exr"><b class="ex">E4</b><div><h3>Robustness</h3>Is it an artefact of the threshold, or of stopping early?</div><div class="mute">Weight threshold 0.05 / 0.2; run length 80,000<br><b>6 × 10 runs</b></div><div>Same survival measure, compared with E1</div><svg viewBox="0 0 120 60"><path d="M4 10 C40 20 70 30 116 52" fill="none" stroke="#8d7c69" stroke-width="3"/><path d="M4 10 C30 30 60 26 116 24" fill="none" stroke="#2c5d8c" stroke-width="3"/></svg></div>
+<div class="card exr"><b class="ex">E5</b><div><h3>Uncertainty</h3>Varying everything at once: how big is the gain, and what drives it?</div><div class="mute">Latin hypercube: W, σ<sub>obs</sub>, σ<sub>mat</sub>, η<sub>P</sub>, β, τ<br><b>60 sets × 2 runs</b></div><div>Share of sets with a gain; <b>PRCC</b> ranks each input’s influence</div><svg viewBox="0 0 120 60"><circle cx="8" cy="50" r="3" fill="#2c5d8c"/><circle cx="18" cy="44" r="3" fill="#2c5d8c"/><circle cx="22" cy="52" r="3" fill="#2c5d8c"/><circle cx="34" cy="38" r="3" fill="#2c5d8c"/><circle cx="40" cy="42" r="3" fill="#2c5d8c"/><circle cx="48" cy="30" r="3" fill="#2c5d8c"/><circle cx="56" cy="36" r="3" fill="#2c5d8c"/><circle cx="62" cy="24" r="3" fill="#2c5d8c"/><circle cx="72" cy="28" r="3" fill="#2c5d8c"/><circle cx="80" cy="18" r="3" fill="#2c5d8c"/><circle cx="88" cy="22" r="3" fill="#2c5d8c"/><circle cx="98" cy="12" r="3" fill="#2c5d8c"/><circle cx="108" cy="10" r="3" fill="#2c5d8c"/><circle cx="112" cy="16" r="3" fill="#2c5d8c"/><line x1="4" y1="54" x2="116" y2="8" stroke="#b5481f" stroke-width="2"/></svg></div>
+</div>
+<div class="mute" style="font-size:18px;margin-top:12px">Every run is seeded and exactly reproducible: about 1 s per run without practice, 6 s with it. All figures and tables are regenerated from the raw results by one script (analysis/make_figures.py).</div>
+</section>
+
 <section class="sl" data-title="H1: copying loses hard steps" data-steps="2" id="h1">
 <div class="eb">Result 1 · H1 supported</div>
 <h2>With copying alone, the hard step dies, and takes the easy last step with it.</h2>
@@ -441,6 +468,11 @@ const N = [
    '[6 Classify] "B asks which of its own beliefs this strike was an example of: about 82% the first, 18% the second."',
    '[7 Learn] "And it nudges both towards what it saw, in proportion. That’s the Falandays–Smaldino learning rule, unchanged."',
    '[8 Turn over] "Finally, A can die, one chance in ten thousand, and is replaced by a newborn who knows nothing. That’s one tick: fifty agents, forty thousand ticks, twenty seeds per setting."'], ['If asked why only successes: people copy success far more than failure (Nakawake & Kobayashi 2022).', 'δ = √(W² + σobs²), matched to copying noise (Truskanov & Prat 2018).']],
+ ['1:00', ['"So what did I actually record? Every thousand ticks, for each technique, I count the agents who still hold it: a belief inside the window of the real target, with weight of at least 0.1. Here, at the end of one run, 23 of 50."',
+    '[→ run] "That gives forty-one records per run. A single record is noisy, so each run is summarised by the mean of its last five records: here 0.52."',
+    '[→ runs] "Each setting is repeated with twenty seeds. Copying alone gives 0.12; with practice, 0.53. Each comes with a 95% confidence interval."',
+    '[→ gap] "The quantity I care about is the gap, the practice benefit: here plus 0.41. The same pipeline runs for all seven techniques, and I also record how many stones get finished and which route agents take."'], ['CI = 1.96 · SD / √n across the 20 run means. Real data: τ = 4, results/main.json; the run shown is the one closest to the mean. If asked why the last five records: steps 36,000 to 40,000, after the transient; E4 doubles the run length to check the steady state.']],
+ ['0:40', ['"Five experiments, 896 runs. E1 is the main test: five difficulties, with practice off and on. E2 crosses the two kinds of noise. E3 changes one assumption at a time to see whether anything flips the result. E4 checks the threshold and the run length. And E5 varies everything at once with a Latin hypercube, and ranks what drives the gain with partial rank correlations."'], ['PRCC: a Spearman-type correlation between one input and the output, after removing the ranked linear effect of the other inputs; it handles monotonic non-linear effects. If asked about significance tests: I report effect sizes with CIs, because n is a free choice in a simulation.']],
  ['1:00', ['"H1. Copying only, over about four lifetimes."',
    '[→ play] "Watch the hard step thin out. T2 ends at 0.12 at our default difficulty, and 0.02 when the window is narrowest."',
    '[→ box] "Two reasons: hard steps produce fewer successful demonstrations, and blurred copying drags beliefs out of a narrow window sooner. And look at T3: it’s easy, but it dies too, because almost no stones get past T2 to demonstrate it. A cascade. Fewer than one percent of tools get finished."'], ['Immortal agents still lose T2 to 0.74 from copying drift alone (test V7).']],
@@ -815,6 +847,79 @@ $('g20').innerHTML = Array.from({ length: 20 }, () => '<i></i>').join('');
 $('g60').innerHTML = Array.from({ length: 60 }, (_, k) => `<i class="${k === 59 ? 'x' : ''}"></i>`).join('');
 setTimeout(() => { const _hr = hooks.hr; hooks.hr = (s, c, p) => { _hr(s, c, p); voSay('hrvo', HRVO[s] || '', c ? 900 : 0); }; }, 0);
 setTimeout(() => { const _lim = hooks.lim; hooks.lim = (s, c, p) => { _lim(s, c, p); voSay('limvo', LIMVO[s] || '', c ? 900 : 0); }; }, 0);
+
+/* ===== analysis: from a snapshot to a comparison ===== */
+const AN = {"0": {"end": [0.124, 0.064, 0.088, 0.04, 0.04, 0.12, 0.196, 0.144, 0.248, 0.16, 0.068, 0.044, 0.072, 0.176, 0.136, 0.108, 0.028, 0.192, 0.132, 0.184], "mu": 0.118, "ci": 0.027, "rep": 5, "ts": [1.0, 0.82, 0.7, 0.64, 0.64, 0.54, 0.56, 0.56, 0.6, 0.48, 0.42, 0.42, 0.42, 0.36, 0.34, 0.38, 0.38, 0.38, 0.36, 0.36, 0.32, 0.38, 0.38, 0.4, 0.38, 0.36, 0.32, 0.28, 0.24, 0.22, 0.22, 0.22, 0.2, 0.18, 0.18, 0.12, 0.14, 0.14, 0.12, 0.1, 0.1]}, "1": {"end": [0.396, 0.632, 0.632, 0.656, 0.564, 0.78, 0.652, 0.516, 0.592, 0.328, 0.324, 0.66, 0.472, 0.412, 0.208, 0.7, 0.696, 0.468, 0.548, 0.348], "mu": 0.529, "ci": 0.068, "rep": 7, "ts": [1.0, 0.9, 0.84, 0.72, 0.7, 0.68, 0.72, 0.7, 0.6, 0.56, 0.62, 0.66, 0.64, 0.68, 0.64, 0.6, 0.54, 0.52, 0.54, 0.54, 0.58, 0.66, 0.66, 0.6, 0.56, 0.46, 0.42, 0.42, 0.44, 0.48, 0.46, 0.48, 0.48, 0.54, 0.56, 0.56, 0.52, 0.52, 0.54, 0.54, 0.46]}};
+(() => {
+  const sv = $('ansvg'); if (!sv) return;
+  const yv = v => 400 - 320 * v, xr = i => 470 + i * 10.5;
+  const holders = new Set(); { let s = 7; while (holders.size < 23) { s = (s * 9301 + 49297) % 233280; holders.add(Math.floor(s / 233280 * 50)); } }
+  const jit = k => ((k * 37) % 19 - 9) * 4.2;
+  const ts = AN[1].ts, last5 = ts.slice(-5), m5 = last5.reduce((a, b) => a + b, 0) / 5;
+  const line = ts.map((v, i) => (i ? 'L' : 'M') + xr(i).toFixed(1) + ' ' + yv(v).toFixed(1)).join(' ');
+  const T = (x, y, s, o = '') => `<text x="${x}" y="${y}" ${o}>${s}</text>`;
+  const axis = (x0, x1) => [0, .5, 1].map(v => `<line x1="${x0}" x2="${x1}" y1="${yv(v)}" y2="${yv(v)}" stroke="#e5d7bd"/>` + T(x0 - 10, yv(v) + 6, v, `text-anchor="end" font-size="17" fill="#7a6550"`)).join('');
+  const col = (p, cx) => AN[p].end.map((v, k) => `<circle class="d${p}" cx="${cx + jit(k)}" cy="${yv(v)}" r="7" fill="${p ? C.blue : C.grey}" fill-opacity=".75"/>`).join('');
+  const mean = (p, cx) => { const m = AN[p].mu, e = AN[p].ci; return `<g class="mb${p}"><rect x="${cx - 6}" y="${yv(m + e)}" width="12" height="${yv(m - e) - yv(m + e)}" fill="${p ? C.blue : C.grey}" opacity=".35"/><line x1="${cx - 58}" x2="${cx + 58}" y1="${yv(m)}" y2="${yv(m)}" stroke="${C.ink}" stroke-width="4"/></g>`; };
+  const gap = (AN[1].mu - AN[0].mu).toFixed(2);
+  sv.innerHTML = `<g font-family="EB Garamond, Georgia, serif" fill="${C.ink}">
+  <g id="anA">${T(20, 34, '① One snapshot', `font-size="27" font-weight="600" fill="${C.ox}"`)}${T(20, 60, 'one run, tick 40,000: who still holds T2?', `font-size="19" fill="#6d5a47"`)}
+    ${[...Array(50)].map((_, k) => `<circle class="ag" data-h="${holders.has(k) ? 1 : 0}" cx="${50 + (k % 10) * 34}" cy="${110 + Math.floor(k / 10) * 34}" r="12" fill="${holders.has(k) ? C.blue : 'none'}" stroke="${holders.has(k) ? C.blue : '#b9a684'}" stroke-width="2"/>`).join('')}
+    ${T(30, 312, 'holds = a belief inside the window τ', `font-size="19" fill="#6d5a47"`)}${T(30, 336, 'of the real target, with weight ≥ 0.1', `font-size="19" fill="#6d5a47"`)}
+    <text id="anN" x="30" y="410" font-size="60" font-weight="600" fill="${C.blue}">23 / 50</text>${T(250, 410, '= 0.46', `font-size="34" fill="${C.ink}"`)}</g>
+  <g id="anB">${T(440, 34, '② One run', `font-size="27" font-weight="600" fill="${C.ox}"`)}${T(440, 60, '41 records, one every 1,000 ticks', `font-size="19" fill="#6d5a47"`)}
+    ${axis(470, 890)}${[0, 10, 20, 30, 40].map(k => T(xr(k), 428, k ? k + 'k' : '0', `text-anchor="middle" font-size="17" fill="#7a6550"`)).join('')}
+    <path id="anL" d="${line}" fill="none" stroke="${C.blue}" stroke-width="3.5" stroke-linejoin="round"/>
+    <g id="an5">${last5.map((v, k) => `<circle cx="${xr(36 + k)}" cy="${yv(v)}" r="6" fill="${C.blue}" stroke="#fbf7ef" stroke-width="2"/>`).join('')}
+      <path d="M${xr(36) - 6} 112 v-10 H${xr(40) + 6} v10" fill="none" stroke="${C.ink}" stroke-width="2"/>${T(xr(38), 90, 'mean of last 5', `text-anchor="middle" font-size="19"`)}
+      <text x="${xr(38)}" y="146" text-anchor="middle" font-size="34" font-weight="600" fill="${C.blue}">${m5.toFixed(2)}</text></g></g>
+  <g id="anC">${T(950, 34, '③ Twenty runs per setting', `font-size="27" font-weight="600" fill="${C.ox}"`)}${T(950, 60, 'each dot is one run’s end survival of T2, τ = 4', `font-size="19" fill="#6d5a47"`)}
+    ${axis(990, 1380)}${col(0, 1090)}${col(1, 1285)}${mean(0, 1090)}${mean(1, 1285)}
+    <g id="anCl">${T(1090, 432, 'Copying only', `text-anchor="middle" font-size="20" fill="#6d5a47"`)}${T(1285, 432, '+ Practice', `text-anchor="middle" font-size="20" fill="${C.blue}"`)}
+    ${T(1090, 466, AN[0].mu.toFixed(2) + ' ± ' + AN[0].ci.toFixed(2), `text-anchor="middle" font-size="26" font-weight="600"`)}${T(1285, 466, AN[1].mu.toFixed(2) + ' ± ' + AN[1].ci.toFixed(2), `text-anchor="middle" font-size="26" font-weight="600" fill="${C.blue}"`)}</g></g>
+  <g id="anD"><path id="anG" d="M1152 ${yv(AN[0].mu)} C1190 ${yv(AN[0].mu)} 1190 ${yv(AN[1].mu)} 1222 ${yv(AN[1].mu)}" fill="none" stroke="${C.ochre}" stroke-width="3" marker-end="url(#anArr)"/>
+    <text x="1174" y="${(yv(AN[0].mu) + yv(AN[1].mu)) / 2 + 10}" text-anchor="end" font-size="30" font-weight="600" fill="${C.ochre}" style="paint-order:stroke;stroke:#fbf7ef;stroke-width:8">+${gap}</text>
+    ${T(20, 518, 'The gap is the <tspan font-weight="600" fill="' + C.ochre + '">practice benefit</tspan>. Same pipeline for all 7 techniques, plus <tspan font-weight="600">completion</tspan> (share of stones finished) and <tspan font-weight="600">route share</tspan> (hard route chosen at s1).', `font-size="22"`)}
+    ${T(20, 550, '95% CI = 1.96 · SD / √20 across run means. Real data from results/main.json; the run shown is the one closest to the mean.', `font-size="17" fill="#7a6550" font-style="italic"`)}</g>
+  <defs><marker id="anArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${C.ochre}"/></marker></defs>
+  <circle id="anFly" r="9" fill="${C.blue}" opacity="0"/></g>`;
+  sv.querySelectorAll('.ag,.mb0,.mb1').forEach(c => { c.style.transformBox = 'fill-box'; c.style.transformOrigin = 'center'; });
+  const G = id => $(id);
+  const fly = (x0, y0, x1, y1, d, dur = 900) => { const f = G('anFly'); f.setAttribute('cx', x1); f.setAttribute('cy', y1);
+    A(f, [{ opacity: 1, transform: `translate(${x0 - x1}px,${y0 - y1}px) scale(1.4)` }, { opacity: 1, transform: `translate(${(x0 - x1) * .4}px,${(y0 - y1) * .4 - 40}px)`, offset: .5 }, { opacity: 1, transform: 'none', offset: .85 }, { opacity: 0, transform: 'scale(2.2)' }], { duration: dur, delay: d, easing: EASE.inout, fill: 'both' }); };
+  const L = G('anL'), len = L.getTotalLength();
+  const kill = () => sv.querySelectorAll('*').forEach(e => e.getAnimations && e.getAnimations().forEach(a => a.cancel()));
+  hooks.an = (s, changed, prevS) => {
+    kill();
+    ['anA', 'anB', 'anC', 'anD'].forEach((id, k) => { G(id).style.opacity = s >= k ? 1 : 0; });
+    G('anN').textContent = '23 / 50';
+    const fwd = changed || s === prevS + 1; if (!fwd || RM) return;
+    if (s === 0) {
+      sv.querySelectorAll('.ag').forEach((c, k) => {
+        A(c, [{ opacity: 0, transform: 'scale(0)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: 500 + k * 14, easing: EASE.out, fill: 'both' });
+        if (c.dataset.h === '1') A(c, [{ fill: 'rgba(44,93,140,0)' }, { fill: C.blue }], { duration: 400, delay: 1400 + k * 22, easing: EASE.out, fill: 'both' });
+      });
+      const n = G('anN'); let st = null; const tick = now => { if (!st) st = now; const p = Math.min(1, Math.max(0, (now - st - 1400) / 1100)); n.textContent = Math.round(23 * p) + ' / 50'; if (p < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick);
+    }
+    if (s === 1) {
+      A(L, [{ strokeDasharray: len, strokeDashoffset: len }, { strokeDasharray: len, strokeDashoffset: 0 }], { duration: 2200, delay: 200, easing: 'cubic-bezier(.3,.1,.3,1)', fill: 'both' });
+      fly(170, 395, xr(40), yv(ts[40]), 1700, 1000);
+      A(G('an5'), [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 2700, easing: EASE.out, fill: 'both' });
+    }
+    if (s === 2) {
+      fly(xr(38), 134, 1285 + jit(AN[1].rep), yv(AN[1].end[AN[1].rep]), 150, 1000);
+      sv.querySelectorAll('.d1').forEach((c, k) => A(c, [{ opacity: 0, transform: 'translateY(-30px)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: k === AN[1].rep ? 1000 : 1200 + k * 45, easing: EASE.out, fill: 'both' }));
+      sv.querySelectorAll('.d0').forEach((c, k) => A(c, [{ opacity: 0, transform: 'translateY(-30px)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: 2300 + k * 45, easing: EASE.out, fill: 'both' }));
+      ['.mb0', '.mb1'].forEach((q, k) => A(sv.querySelector(q), [{ opacity: 0, transform: 'scaleX(0)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 3400 + k * 200, easing: EASE.out, fill: 'both' }));
+      A(G('anCl'), [{ opacity: 0 }, { opacity: 1 }], { duration: 700, delay: 3800, fill: 'both' });
+    }
+    if (s === 3) {
+      const g = G('anG'), gl = g.getTotalLength();
+      A(g, [{ strokeDasharray: gl, strokeDashoffset: gl }, { strokeDasharray: gl, strokeDashoffset: 0 }], { duration: 900, delay: 200, easing: EASE.inout, fill: 'both' });
+      [...G('anD').children].slice(1).forEach((c, k) => A(c, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 900 + k * 400, easing: EASE.out, fill: 'both' }));
+    }
+  };
+})();
 hooksIn.sure = () => {
   [...$('g20').children].forEach((g, k) => A(g, [{ transform: 'scaleY(0)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 300, delay: 700 + k * 55, easing: EASE.soft }));
   [...$('g60').children].forEach((g, k) => A(g, [{ transform: 'scale(0)', opacity: 0 }, { transform: 'scale(1.4)', opacity: 1, offset: .6 }, { transform: 'none' }], { duration: 320, delay: 2300 + k * 22 + (k === 59 ? 400 : 0), easing: EASE.soft }));
