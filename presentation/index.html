@@ -490,7 +490,7 @@ const chi3 = x => x <= 0 ? 0 : erf(Math.sqrt(x/2)) - Math.sqrt(2*x/Math.PI)*Math
 const W = 1.5, SM = 1, SO = 3, DELTA = Math.sqrt(W*W + SO*SO);
 const pSucc = (tau, prac) => chi3((tau / Math.sqrt(W*W + SM*SM + (prac ? DELTA*DELTA : 0))) ** 2);
 function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const RM = /[?&]calm\b/.test(location.search);   /* motion is the content: play it even when the OS asks for reduced motion; add ?calm to turn it off */
 
 /* ---------- notes (full speech) ---------- */
 const N = [
