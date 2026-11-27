@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Redirecting…</title>
+<script>
+(function(){
+  var p = location.pathname, root = '/' + p.split('/')[1];
+  var m = p.match(/^(.*\/presentation)\/slide(\d+)\/?$/);
+  location.replace(m ? m[1] + '/?slide=' + m[2] + location.hash : root + '/presentation/');
+})();
+</script></head><body></body></html>
