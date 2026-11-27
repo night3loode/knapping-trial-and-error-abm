@@ -18,6 +18,14 @@ miss or break the stone), a reduction sequence (stone states), route choice, and
 The full model description is the *Methods — Base Model V1* document; section numbers in the
 code comments refer to it.
 
+## Presentation
+
+![Cover of the presentation](presentation/cover.jpg)
+
+The talk is a single self-contained HTML file, [`presentation/index.html`](presentation/index.html):
+download it and open it in any browser, no internet needed. It opens on a cover page and starts
+on click, Space or Enter. Keys: → / ← to move, **F** fullscreen, **S** speaker notes.
+
 ## Repository layout
 
 ```
@@ -29,6 +37,7 @@ tests/verify*.py         verification tests V1–V12; tests/verification_log.txt
 results/                 raw results (JSON, one record per run)
 figures/                 figures + summary_tables.md
 report/                  final report (docx + pdf)
+presentation/            the talk: one self-contained HTML deck (open index.html in a browser)
 legacy/                  F&S replication (model_main.py) and Part D (transition-matrix) code
 ```
 
