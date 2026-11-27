@@ -33,7 +33,7 @@
 
 (Let the morning come up: the chalk cliff, three people at a flint scatter. Then, warmly:) Good morning. / At mid-sem I ended on this line: / *now, try it yourself*. / Today / I built that idea / and ran it.
 
-> If asked: AI use is on the slide. AI assisted with coding, tests, plotting and editing text; the question, design, analysis and interpretation are mine. Make sure this matches Appendix E of the report.
+> If asked: The AI-use line now matches Appendix E of the report word for word in substance. If asked: I designed the questions and the V1 model; Claude helped implement, test, run, plot and draft from my design; I checked everything and can walk through any part of the code.
 
 ## 3. The question  ·  Daylight  ·  0:25 (ends at 1:30)
 
