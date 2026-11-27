@@ -23,8 +23,7 @@ code comments refer to it.
 ![Cover of the presentation](presentation/cover.jpg)
 
 The talk is a single self-contained HTML file, [`presentation/index.html`](presentation/index.html):
-download it and open it in any browser, no internet needed. It opens on a cover page and starts
-on click, Space or Enter. Keys: → / ← to move, **F** fullscreen, **S** speaker notes.
+download it and open it in any browser, no internet needed. It opens on the cold open. Keys: → / ← to move, **F** fullscreen, **S** speaker notes.
 
 ## Repository layout
 
